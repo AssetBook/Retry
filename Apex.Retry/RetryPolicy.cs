@@ -10,10 +10,11 @@ namespace Apex.Retry
     {
         private int _numberOfAttempts = 0;
         private int _maxRetryAttempts = 3;
-        private TimeSpan _waitTimeBetweenRetries = new TimeSpan(0, 0, 0, 1000);
+        private TimeSpan _waitTimeBetweenRetries = new TimeSpan(0, 0, 0, 1);
         private readonly Action _methodToExecute;
         private List<Type> _retryOnExceptions;
-
+	    private Func<bool> _expressionToEvaluate;
+ 
         /// <summary>
         /// 
         /// </summary>        
@@ -29,12 +30,32 @@ namespace Apex.Retry
             return this;
         }
 
+		/// <summary>
+		/// <param>expressionToEvaluate</param> should return <value>false</value>
+		/// in order to not continue evaluating. A return of <value>true</value> will trigger
+		/// a retry.
+		/// </summary>
+		/// <param name="expressionToEvaluate">An expression that evaluates to <value>true</value> or <value>false</value>.</param>
+	    public RetryPolicy WithRetryOn(Func<bool> expressionToEvaluate)
+	    {
+		    _expressionToEvaluate = expressionToEvaluate;
+		    return this;
+	    }
+
+		/// <summary>
+		/// Determines how long to wait between retries.
+		/// </summary>
+		/// <param name="waitTime">How long to wait between attempts.</param>
         public RetryPolicy WithWaitStrategy(TimeSpan waitTime)
         {
             _waitTimeBetweenRetries = waitTime;
             return this;
         }
 
+		/// <summary>
+		/// Defines how many times to retry before giving up.
+		/// </summary>
+		/// <param name="maxRetries">Number of times to try.</param>
         public RetryPolicy WithStopStrategy(int maxRetries)
         {
             _maxRetryAttempts = maxRetries;
@@ -51,7 +72,7 @@ namespace Apex.Retry
                 try
                 {
                     _methodToExecute();
-                    break;
+					if(_expressionToEvaluate == null || _expressionToEvaluate() == false) break;					
                 }
                 catch (Exception ex)
                 {

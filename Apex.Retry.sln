@@ -12,19 +12,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A56365
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apex.Retry.Test", "Apex.Retry.Test\Apex.Retry.Test.csproj", "{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Dev|Any CPU = Dev|Any CPU
 		Prod|Any CPU = Prod|Any CPU
 		Qa|Any CPU = Qa|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{775C539D-0E40-4A4D-869F-AF358337475C}.Debug|Any CPU.ActiveCfg = Dev|Any CPU
+		{775C539D-0E40-4A4D-869F-AF358337475C}.Debug|Any CPU.Build.0 = Dev|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Dev|Any CPU.ActiveCfg = Dev|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Dev|Any CPU.Build.0 = Dev|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Prod|Any CPU.Build.0 = Prod|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Qa|Any CPU.ActiveCfg = Qa|Any CPU
 		{775C539D-0E40-4A4D-869F-AF358337475C}.Qa|Any CPU.Build.0 = Qa|Any CPU
+		{775C539D-0E40-4A4D-869F-AF358337475C}.Release|Any CPU.ActiveCfg = Prod|Any CPU
+		{775C539D-0E40-4A4D-869F-AF358337475C}.Release|Any CPU.Build.0 = Prod|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Prod|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Prod|Any CPU.Build.0 = Release|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Qa|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Qa|Any CPU.Build.0 = Release|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA5A828-0F32-4444-8BF3-CDD99FDFD6CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
