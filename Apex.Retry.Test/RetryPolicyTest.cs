@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
 using NUnit.Framework;
 
-namespace Apex.Retry.Tests
+namespace Apex.Retry.Test
 {
     [TestFixture]
     public class RetryPolicyTest
@@ -52,5 +47,26 @@ namespace Apex.Retry.Tests
             Assert.Throws<NotImplementedException>(() => sut.Process());
             Assert.That(actual, Is.EqualTo(expected));            
         }
+
+	    [Test]
+	    public void Process_should_retry_when_expression_evalutes_to_true()
+	    {
+			int actual = 0;
+			Action testMethod = () =>
+			{
+				actual++;
+			};
+
+		    Func<bool> expression = () => actual <= 1;
+
+			var sut = new RetryPolicy(testMethod)
+				.WithRetryOn(expression)				
+				.WithStopStrategy(3);
+
+			const int expected = 2;
+
+			sut.Process();
+			Assert.That(actual, Is.EqualTo(expected));            
+	    }
     }
 }
