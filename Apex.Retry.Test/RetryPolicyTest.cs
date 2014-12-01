@@ -1,4 +1,5 @@
 ﻿using System;
+using NSubstitute.Routing.Handlers;
 using NUnit.Framework;
 
 namespace Apex.Retry.Test
@@ -67,6 +68,20 @@ namespace Apex.Retry.Test
 
 			sut.Process();
 			Assert.That(actual, Is.EqualTo(expected));            
+	    }
+
+	    [Test]
+	    public void Process_should_call_WhenMaxAttemptsReached_deleage_when_max_attempts_have_been_reached()
+	    {
+		    var actual = false;
+		    var sut = new RetryPolicy(() => { var a = 1 + 1; })
+			    .WithRetryOn(() => 1 == 2)
+			    .WithStopStrategy(1)
+			    .WhenMaxAttemptsReached(() => actual = true);
+
+			sut.Process();
+
+			Assert.That(actual, Is.True);
 	    }
     }
 }
