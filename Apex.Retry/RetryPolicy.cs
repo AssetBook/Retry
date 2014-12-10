@@ -14,7 +14,8 @@ namespace Apex.Retry
         private readonly Action _methodToExecute;
         private List<Type> _retryOnExceptions;
 	    private Func<bool> _expressionToEvaluate;
- 
+	    private Action _whenMaxAttemptsReached;
+
         /// <summary>
         /// 
         /// </summary>        
@@ -62,6 +63,12 @@ namespace Apex.Retry
             return this;
         }
 
+	    public RetryPolicy WhenMaxAttemptsReached(Action doThis)
+	    {
+		    _whenMaxAttemptsReached = doThis;
+		    return this;
+	    }
+
         public void Process()
         {
             while (_numberOfAttempts < _maxRetryAttempts)
@@ -79,6 +86,8 @@ namespace Apex.Retry
                     if (!ShouldRetry(ex)) throw;
                 }
             }
+
+	        if (_whenMaxAttemptsReached != null && _numberOfAttempts == _maxRetryAttempts) _whenMaxAttemptsReached();
         }
 
         private bool ShouldRetry(Exception ex)
